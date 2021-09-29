@@ -1,8 +1,10 @@
+// https://github.com/Systems-Modeling/SysML-v2-Release 2021-08
+
 package 'Sensing System Logical Architecture'
 {
 	import 'Sensing System Base Architecture'::*;
 	import 'Sensing System Context'::*;
-	import 'Sensing System Domain Knowledges'::*;
+	import 'Sensing System Domain Knowledge'::*;
 
 	// ====================================
 	// Definitions of System Logical Architecture Context
@@ -14,7 +16,8 @@ package 'Sensing System Logical Architecture'
 	// ====================================
 	// Definitions of System Logical Architecture
 	// ====================================
-	part def Sensing_System_Logical_Architecture {
+	part arch_cxt: Sensing_System_Logical_Architecture_Context;
+	part def Sensing_System_Logical_Architecture :> Sensing_System {
 		// Part
 		part mcu: MCU[1];
 		part gs: Gyro_Sensor[1];
@@ -33,50 +36,50 @@ package 'Sensing System Logical Architecture'
 		// ====================================
 		// External Interfaces
 		interface: IF_DEF_EXT_VehicleMotion connect
-			if_in_vm => p_in_vm to
-			if_int_in_vm => gs.p_in_vm;
+			if_in_vm :> p_in_vm to
+			if_int_in_vm :> gs.p_in_vm;
 		interface: IF_DEF_EXT_CanSenData connect
-			if_int_out_can => can.p_out_can to
-			if_out_can => p_out_can;
+			if_int_out_can :> can.p_out_can to
+			if_out_can :> p_out_can;
 
 		// Internal Interfaces
 		interface: IF_DEF_INT_RawSenData connect
-			if_int_out_raw_sen_data => gs.p_out_raw_sen_data to
-			if_int_in_raw_sen_data => mcu.p_in_raw_sen_data;
+			if_int_out_raw_sen_data :> gs.p_out_raw_sen_data to
+			if_int_in_raw_sen_data :> mcu.p_in_raw_sen_data;
 		interface: IF_DEF_INT_SenData connect
-			if_int_out_sen_data => mcu.p_out_sen_data to
-			if_int_in_sen_data => can.p_in_sen_data;
+			if_int_out_sen_data :> mcu.p_out_sen_data to
+			if_int_in_sen_data :> can.p_in_sen_data;
 		interface: IF_DEF_INT_ResetSig connect
-			if_int_out_reset_sig => rg.p_out_reset_sig to
-			if_int_in_reset_sig => mcu.p_in_reset_sig;
+			if_int_out_reset_sig :> rg.p_out_reset_sig to
+			if_int_in_reset_sig :> mcu.p_in_reset_sig;
 		interface: IF_DEF_INT_WdgReset connect
-			if_int_out_wdg_reset => wdg.p_out_wdg_reset to
-			if_int_in_wdg_reset => mcu.p_in_wdg_reset;
+			if_int_out_wdg_reset :> wdg.p_out_wdg_reset to
+			if_int_in_wdg_reset :> mcu.p_in_wdg_reset;
 
 		// ====================================
 		// Definitions of Interfaces (Power supply connection and flow oriented view)
 		// ====================================
 		// External Interfaces
 		interface: IF_DEF_ExtPwr connect
-			if_in_ext_pwr => p_in_ext_pwr to
-			if_int_in_ext_pwr => pr.p_in_ext_pwr;
+			if_in_ext_pwr :> p_in_ext_pwr to
+			if_int_in_ext_pwr :> pr.p_in_ext_pwr;
 
 		// Internal Interfaces
 		interface: IF_DEF_INT_RegPwr connect
-			if_int_out_reg_pwr => pr.p_out_reg_pwr to
-			if_int_in_reg_pwr => mcu.p_in_reg_pwr;
+			if_int_out_reg_pwr :> pr.p_out_reg_pwr to
+			if_int_in_reg_pwr :> mcu.p_in_reg_pwr;
 		interface: IF_DEF_INT_RegPwr connect
-			if_int_out_reg_pwr => pr.p_out_reg_pwr to
-			if_int_in_reg_pwr => gs.p_in_reg_pwr;
+			if_int_out_reg_pwr :> pr.p_out_reg_pwr to
+			if_int_in_reg_pwr :> gs.p_in_reg_pwr;
 		interface: IF_DEF_INT_RegPwr connect
-			if_int_out_reg_pwr => pr.p_out_reg_pwr to
-			if_int_in_reg_pwr => can.p_in_reg_pwr;
+			if_int_out_reg_pwr :> pr.p_out_reg_pwr to
+			if_int_in_reg_pwr :> can.p_in_reg_pwr;
 		interface: IF_DEF_INT_RegPwr connect
-			if_int_out_reg_pwr => pr.p_out_reg_pwr to
-			if_int_in_reg_pwr => rg.p_in_reg_pwr;
+			if_int_out_reg_pwr :> pr.p_out_reg_pwr to
+			if_int_in_reg_pwr :> rg.p_in_reg_pwr;
 		interface: IF_DEF_INT_RegPwr connect
-			if_int_out_reg_pwr => pr.p_out_reg_pwr to
-			if_int_in_reg_pwr => wdg.p_in_reg_pwr;
+			if_int_out_reg_pwr :> pr.p_out_reg_pwr to
+			if_int_in_reg_pwr :> wdg.p_in_reg_pwr;
 	}
 
 	// ====================================

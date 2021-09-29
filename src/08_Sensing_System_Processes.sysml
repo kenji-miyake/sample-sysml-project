@@ -1,3 +1,5 @@
+// https://github.com/Systems-Modeling/SysML-v2-Release 2021-08
+
 package 'Sensing System Processes'
 {
 	import 'Sensing System Use Case Activity'::*;

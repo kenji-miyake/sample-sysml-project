@@ -1,4 +1,6 @@
-package 'Sensing System Domain Knowledges'
+// https://github.com/Systems-Modeling/SysML-v2-Release 2021-08
+
+package 'Sensing System Domain Knowledge'
 {
 	// ====================================
 	// Definitions of Sensing System Domain Knowledge

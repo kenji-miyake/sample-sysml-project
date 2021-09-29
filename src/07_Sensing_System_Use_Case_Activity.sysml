@@ -1,6 +1,8 @@
+// https://github.com/Systems-Modeling/SysML-v2-Release 2021-08
+
 package 'Sensing System Use Case Activity'
 {
-	import 'Sensing System Domain Knowledges'::*;
+	import 'Sensing System Domain Knowledge'::*;
 
 	// ====================================
 	// Definitions of Actions
@@ -18,7 +20,7 @@ package 'Sensing System Use Case Activity'
 	action def DetermineDefaultData(out initial: Data_Status);
 	action def DeterminePermanentFail(out perm_fail: Data_Status);
 	action def DetermineTemporaryFail(out temp_fail: Data_Status, out num_of_fail: Num_Of_Fail);
-	action def GenerateNormalData(in raw_sen_data: Raw_Sen_Data, out sen_data: Sen_Data);
+	action def GenerateNormalData(in raw_sen_data_in: Raw_Sen_Data, out sen_data: Sen_Data);
 	action def GenerateDefaultData(out sen_data: Sen_Data);
 	action def GeneratePermanentFail(out sen_data: Sen_Data);
 	action def GenerateTemporaryFail(out sen_data: Sen_Data);
@@ -50,7 +52,7 @@ package 'Sensing System Use Case Activity'
 			then JoinNode;
 			then merge ContinuousLoop;
 			then action determine_default_data: DetermineDefaultData {
-				out item initial = start_system::initial;
+				out item initial = start_system.initial;
 			}
 			then action wait_100ms: Wait100Ms;
 			then ContinuousLoop;
@@ -78,7 +80,7 @@ package 'Sensing System Use Case Activity'
 		action rcv_initialization_completed accept initialization_completed: Initialization_Completed;
 		then merge ContinuousLoop;
 			then action acquire_yaw_motion: AcquireYawMotion {
-				in item vm = detect_yaw_moment::vm;
+				in item vm = detect_yaw_moment.vm;
 				out item raw_sen_data;
 			}
 
@@ -87,7 +89,7 @@ package 'Sensing System Use Case Activity'
 				if ((acquire_yaw_motion.raw_sen_data <= 127.75) && (acquire_yaw_motion.raw_sen_data >= -128.00)) then determine_normal_data;
 
 			action determine_temp_fail: DetermineTemporaryFail {
-				out item temp_fail = detect_yaw_moment::temp_fail;
+				out item temp_fail = detect_yaw_moment.temp_fail;
 				out item num_of_fail;
 			}
 			then action wait_100ms: Wait100Ms;
@@ -96,9 +98,9 @@ package 'Sensing System Use Case Activity'
 				if (determine_temp_fail.num_of_fail < 3) then ContinuousLoop;
 
 			action determine_normal_data: DetermineNormalData {
-				in item raw_sen_data_in flow from acquire_yaw_motion::raw_sen_data;
-				out item raw_sen_data: Raw_Sen_Data = detect_yaw_moment::raw_sen_data;
-				out item normal: Data_Status = detect_yaw_moment::normal;
+				in item raw_sen_data_in flow from acquire_yaw_motion.raw_sen_data;
+				out item raw_sen_data: Raw_Sen_Data = detect_yaw_moment.raw_sen_data;
+				out item normal: Data_Status = detect_yaw_moment.normal;
 			}
 			then action wait2_100ms: Wait100Ms;
 			then ContinuousLoop;
@@ -117,7 +119,7 @@ package 'Sensing System Use Case Activity'
 		then action rcv_sensor_failed accept sensor_failed: Sensor_Failed;
 		then merge ContinuousLoop;
 			then action determine_perm_fail: DeterminePermanentFail {
-				out item perm_fail = stop_detect_yaw_moment::perm_fail;
+				out item perm_fail = stop_detect_yaw_moment.perm_fail;
 			}
 			then action wait_100ms: Wait100Ms;
 			then ContinuousLoop;
@@ -143,20 +145,20 @@ package 'Sensing System Use Case Activity'
 				if (data_status == 3) then generate_temp_fail;
 			then merge CombinePath;
 			then action format_data: FormatData{
-				in item sen_data_normal flow from generate_normal_data::sen_data;
-				in item sen_data_default flow from generate_default_data::sen_data;
-				in item sen_data_temp_fail flow from generate_temp_fail::sen_data;
-				in item sen_data_perm_fail flow from generate_perm_fail::sen_data;
+				in item sen_data_normal flow from generate_normal_data.sen_data;
+				in item sen_data_default flow from generate_default_data.sen_data;
+				in item sen_data_temp_fail flow from generate_temp_fail.sen_data;
+				in item sen_data_perm_fail flow from generate_perm_fail.sen_data;
 				out item can_data;
 			}
 			then action output_can_data: OutputCanDat {
-				in item can_data_in flow from format_data::can_data;
-				out item can_data = transmit_sensing_data::can_data;
+				in item can_data_in flow from format_data.can_data;
+				out item can_data = transmit_sensing_data.can_data;
 			}
 			then ContinuousLoop;
 
 		action generate_normal_data: GenerateNormalData {
-			in item raw_sen_data flow from transmit_sensing_data::raw_sen_data;
+			in item raw_sen_data_in = transmit_sensing_data.raw_sen_data;
 			out item sen_data;
 		}
 		then CombinePath;
