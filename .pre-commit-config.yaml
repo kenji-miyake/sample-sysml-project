@@ -54,4 +54,9 @@ repos:
       - id: black
         args: ["--line-length=100"]
 
-exclude: ".svg"
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.1.10
+    hooks:
+      - id: remove-tabs
+
+exclude: ".svg|.project"
