@@ -4,6 +4,7 @@ import Views::*; // import library package, not internal Views package!
 package 'Sensing System Viewpoints and Views'
 {
     import 'Sensing System Stakeholder'::*;
+    import 'Sensing System Requirements'::*;
 
     viewpoint 'customer viewpoint' {
         frame 'requirement traceability';
