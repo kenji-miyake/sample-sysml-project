@@ -3,7 +3,7 @@
 package 'Sensing System Use Case'
 {
 	import 'Sensing System Context'::*;
-	
+
 	use case 'Start the System' {
 		subject sensing_system: Sensing_System[1];
 		actor vm: Vehicle_Motion[1];
@@ -14,7 +14,7 @@ package 'Sensing System Use Case'
 			 	 */
 		}
 	}
-	
+
 	use case 'Stop the System' {
 		subject sensing_system: Sensing_System[1];
 		actor vm: Vehicle_Motion[1];
@@ -25,7 +25,7 @@ package 'Sensing System Use Case'
 			 	 */
 		}
 	}
-	
+
 	use case 'Detect the Yaw Moment' {
 		subject sensing_system: Sensing_System[1];
 		actor vm: Vehicle_Motion[1];
@@ -35,7 +35,7 @@ package 'Sensing System Use Case'
 			 	 */
 		}
 	}
-	
+
 	use case 'Stop Detecting the Yaw Moment' {
 		subject sensing_system: Sensing_System[1];
 		actor vm: Vehicle_Motion[1];
@@ -45,7 +45,7 @@ package 'Sensing System Use Case'
 			 	 */
 		}
 	}
-	
+
 	use case 'Transmit the Sensing Data' {
 		subject sensing_system: Sensing_System[1];
 		actor act: Actuator_System[1];

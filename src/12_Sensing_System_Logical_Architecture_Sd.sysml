@@ -5,7 +5,7 @@
 package 'Sensing System Logical Architecture Sequence'
 {
 	import 'Sensing System Logical Architecture'::*;
-	
+
 	occurrence def 'Start the System' {
 		ref part :>> arch_cxt;
 		// @ToDo Parallel
@@ -14,12 +14,12 @@ package 'Sensing System Logical Architecture Sequence'
 		// @ToDo Parallel
 		message initializeTheSensors from arch_cxt.sensing_system_log_arch.mcu to arch_cxt.sensing_system_log_arch.gs;
 	}
-	
+
 	occurrence def 'Stop the System' {
 		ref part :>> arch_cxt;
 		message shutdownTheSensors from arch_cxt.sensing_system_log_arch.mcu to arch_cxt.sensing_system_log_arch.gs;
 	}
-	
+
 	occurrence def 'Detect the Yaw Moment' {
 		ref part :>> arch_cxt;
 		message acquireTheYawMotion from arch_cxt.sensing_system_log_arch.mcu to arch_cxt.sensing_system_log_arch.gs;
@@ -28,12 +28,12 @@ package 'Sensing System Logical Architecture Sequence'
 		// @ToDo if input sensor data is out of valid range
 		message determineTemporaryFailure from arch_cxt.sensing_system_log_arch.mcu to arch_cxt.sensing_system_log_arch.mcu;
 	}
-	
+
 	occurrence def 'Stop Detecting the Yaw Moment' {
 		ref part :>> arch_cxt;
 		message determinePermanentFailure from arch_cxt.sensing_system_log_arch.mcu to arch_cxt.sensing_system_log_arch.mcu;
 	}
-	
+
 	occurrence def 'Transmit the Sensing Data' {
 		ref part :>> arch_cxt;
 		// @ToDo if yaw moment data status is normal
