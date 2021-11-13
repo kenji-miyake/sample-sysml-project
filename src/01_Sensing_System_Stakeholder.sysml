@@ -22,7 +22,7 @@ package 'Sensing System Stakeholder'
     }
 
     concern 'feasible system requirement and architecture' {
-        doc /* Will you create system requirements and architecure
+        doc /* Will you create system requirements and architecture
                with which software engineers can define their software requirements and  architecture?
          */
         stakeholder 'Software Engineer';

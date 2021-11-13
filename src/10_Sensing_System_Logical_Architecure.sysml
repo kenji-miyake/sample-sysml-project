@@ -32,7 +32,7 @@ package 'Sensing System Logical Architecture'
         port p_out_can: IF_CanSenData;
 
         // ====================================
-        // Definitions of Interfaces (Connection and flow orinted view)
+        // Definitions of Interfaces (Connection and flow oriented view)
         // ====================================
         // External Interfaces
         interface: IF_DEF_EXT_VehicleMotion connect
@@ -116,7 +116,7 @@ package 'Sensing System Logical Architecture'
     }
 
     // ====================================
-    // Definitions of Interfaces (Connection and flow orinted view)
+    // Definitions of Interfaces (Connection and flow oriented view)
     // ====================================
     interface def IF_DEF_EXT_VehicleMotion {
         end if_in_vm: IF_VehicleMotion;
