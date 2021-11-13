@@ -4,11 +4,11 @@ import Views::*; // import library package, not internal Views package!
 package 'Sensing System Viewpoints and Views'
 {
 	import 'Sensing System Stakeholder'::*;
-	
+
 	viewpoint 'customer viewpoint' {
 		frame 'requirement traceability';
 		frame 'requirement refinement';
-		
+
 		require constraint {
 			doc /* A system structure show the hierarchical part decomposition of a system from customer requirement. */
 		}
@@ -30,12 +30,12 @@ package 'Sensing System Viewpoints and Views'
 //		expose 'Sensing System Logical Architecture Sequence'::**;
 		render asTreeDiagram;
 	}
-	
+
 	viewpoint 'software engineer viewpoint' {
 		frame 'requirement refinement';
 		frame 'requirement and architecture definition';
 		frame 'feasible system requirement and architecture';
-		
+
 		require constraint {
 			doc /* A system structure show the hierarchical part decomposition of a system for software domain engineer. */
 		}
